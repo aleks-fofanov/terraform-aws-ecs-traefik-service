@@ -43,7 +43,7 @@ This example creates a Traefik service in ECS launched in `us-west-2` region usi
 
 ```hcl
 module "traefik" {
-  source    = "git::https://aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
+  source    = "git::https://github.com/aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
   name      = "traefik"
   namespace = "cp"
   stage     = "prod"
@@ -76,7 +76,7 @@ openssl passwd -apr1
 
 ```hcl
 module "traefik" {
-  source    = "git::https://aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
+  source    = "git::https://github.com/aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
   name      = "traefik"
   namespace = "cp"
   stage     = "prod"
@@ -109,7 +109,7 @@ This example:
 
 ```hcl
 module "traefik" {
-  source    = "git::https://aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
+  source    = "git::https://github.com/aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
   name      = "traefik"
   namespace = "cp"
   stage     = "prod"
@@ -248,6 +248,14 @@ Available targets:
 | task_role_id | ECS Task role id |
 | task_role_name | ECS Task role name |
 
+
+
+
+## Related Projects
+
+Check out these related projects.
+
+- [terraform-aws-ecs-cluster-traefik](https://github.com/aleks-fofanov/terraform-aws-ecs-cluster-traefik) - Terraform module to provision ECS cluster with as an edge router
 
 
 

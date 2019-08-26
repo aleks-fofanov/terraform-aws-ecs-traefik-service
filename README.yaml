@@ -33,7 +33,10 @@ badges:
     image: "https://img.shields.io/github/release/aleks-fofanov/terraform-aws-ecs-traefik-service.svg"
     url: "https://github.com/aleks-fofanov/terraform-aws-ecs-traefik-service/releases/latest"
 
-#related: []
+related:
+  - name: "terraform-aws-ecs-cluster-traefik"
+    description: "Terraform module to provision ECS cluster with as an edge router"
+    url: "https://github.com/aleks-fofanov/terraform-aws-ecs-cluster-traefik"
 
 # Short description of this project
 description: |-
@@ -57,7 +60,7 @@ usage: |-
 
   ```hcl
   module "traefik" {
-    source    = "git::https://aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
+    source    = "git::https://github.com/aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
     name      = "traefik"
     namespace = "cp"
     stage     = "prod"
@@ -86,7 +89,7 @@ examples: |-
 
   ```hcl
   module "traefik" {
-    source    = "git::https://aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
+    source    = "git::https://github.com/aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
     name      = "traefik"
     namespace = "cp"
     stage     = "prod"
@@ -119,7 +122,7 @@ examples: |-
 
   ```hcl
   module "traefik" {
-    source    = "git::https://aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
+    source    = "git::https://github.com/aleks-fofanov/terraform-aws-ecs-traefik-service.git?ref=master"
     name      = "traefik"
     namespace = "cp"
     stage     = "prod"
