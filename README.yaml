@@ -31,7 +31,7 @@ badges:
     url: "https://travis-ci.org/aleks-fofanov/terraform-aws-ecs-traefik-service"
   - name: "Latest Release"
     image: "https://img.shields.io/github/release/aleks-fofanov/terraform-aws-ecs-traefik-service.svg"
-    url: "https://github.com/cloudposse/terraform-aws-ssm-iam-role/releases/latest"
+    url: "https://github.com/aleks-fofanov/terraform-aws-ecs-traefik-service/releases/latest"
 
 #related: []
 
