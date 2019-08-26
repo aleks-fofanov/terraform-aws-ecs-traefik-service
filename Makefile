@@ -9,5 +9,5 @@ export README_DEPS ?= docs/targets.md docs/terraform.md
 lint:
 	$(SELF) terraform/install terraform/get-modules terraform/get-plugins terraform/lint terraform/validate
 
-override readme:
+override readme/sync: # Aka build with custom template
 	README_TEMPLATE_FILE=$(shell pwd)/templates/README.md $(SELF) readme/build
