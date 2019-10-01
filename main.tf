@@ -170,14 +170,14 @@ data "aws_iam_policy_document" "traefik" {
   }
 }
 
-resource "aws_iam_policy" "traefik_ecs_exec_role_additions" {
+resource "aws_iam_policy" "traefik_ecs_task_role_additions" {
   name   = "${module.default_label.id}"
   policy = "${data.aws_iam_policy_document.traefik.json}"
 }
 
-resource "aws_iam_role_policy_attachment" "traefik_ecs_exec_role_additions" {
+resource "aws_iam_role_policy_attachment" "traefik_ecs_task_role_additions" {
   role       = "${module.alb_service_task.task_role_name}"
-  policy_arn = "${aws_iam_policy.traefik_ecs_exec_role_additions.arn}"
+  policy_arn = "${aws_iam_policy.traefik_ecs_task_role_additions.arn}"
 }
 
 #############################################################
