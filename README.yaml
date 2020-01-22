@@ -40,7 +40,8 @@ related:
 
 # Short description of this project
 description: |-
-  Terraform module to provision [Traefik](https://traefik.io/) service in ECS
+  Terraform module to provision [Traefik](https://traefik.io/) service in ECS.
+  This module supports [traefik v1.7](https://docs.traefik.io/v1.7/).
 
   ### Terraform versions
 
@@ -85,7 +86,7 @@ usage: |-
   ```
 
 examples: |-
-  ### Example With [Traefik Dashboard](https://docs.traefik.io/configuration/api/) Enabled
+  ### Example With [Traefik Dashboard](https://docs.traefik.io/v1.7/configuration/api/) Enabled
 
   This example launches a Traefik setvice in ECS using `FARGATE` with enabled dashboard and API endpoints.
   Basic auth is enabled by default for both. You can use `openssl` to generate password for basic auth:
