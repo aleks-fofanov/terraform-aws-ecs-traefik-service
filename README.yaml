@@ -42,6 +42,12 @@ related:
 description: |-
   Terraform module to provision [Traefik](https://traefik.io/) service in ECS
 
+  ### Terraform versions
+
+  Terraform 0.12. Pin module version to ~> v1.0. Submit pull-requests to `master` branch.
+
+  Terraform 0.11. Pin module version to ~> v0.1. Submit pull-requests to `terraform011` branch.
+
 introduction: |-
   Traefik service in ECS is supposed to act as an edge router and route traffic to other containers in your ECS cluster
   based on their docker lables.
@@ -74,7 +80,7 @@ usage: |-
     subnet_ids            = ["XXXXXXXXXXX", "XXXXXXXXXXX", ..]
 
     launch_type      = "FARGATE"
-    assign_public_ip = "true"
+    assign_public_ip = true
   }
   ```
 
@@ -103,9 +109,9 @@ examples: |-
     subnet_ids            = ["XXXXXXXXXXX", "XXXXXXXXXXX", ..]
 
     launch_type      = "FARGATE"
-    assign_public_ip = "true"
+    assign_public_ip = true
 
-    dashboard_enabled             = "true"
+    dashboard_enabled             = true
     dashboard_host                = "traefik.example.com"
     dashboard_basic_auth_user     = "admin"
     dashboard_basic_auth_password = "$$$apr1$$$Rj21EpGU$$$KCwTHCbAIVhw0BiSdU4Me0"
@@ -136,23 +142,23 @@ examples: |-
     subnet_ids            = ["XXXXXXXXXXX", "XXXXXXXXXXX", ..]
 
     launch_type      = "FARGATE"
-    assign_public_ip = "true"
+    assign_public_ip = true
 
-    dashboard_enabled             = "true"
+    dashboard_enabled             = true
     dashboard_host                = "traefik.example.com"
     dashboard_basic_auth_user     = "admin"
     dashboard_basic_auth_password = "$$$apr1$$$Rj21EpGU$$$KCwTHCbAIVhw0BiSdU4Me0"
 
-    autoscaling_enabled               = "true"
+    autoscaling_enabled               = true
     autoscaling_dimension             = "cpu"
-    autoscaling_min_capacity          = "1"
-    autoscaling_max_capacity          = "3"
-    autoscaling_scale_up_cooldown     = "60"
-    autoscaling_scale_down_cooldown   = "60"
+    autoscaling_min_capacity          = 1
+    autoscaling_max_capacity          = 3
+    autoscaling_scale_up_cooldown     = 60
+    autoscaling_scale_down_cooldown   = 60
 
-    ecs_alarms_enabled                        = "true"
-    ecs_alarms_cpu_utilization_high_threshold = "20"
-    ecs_alarms_cpu_utilization_low_threshold  = "10"
+    ecs_alarms_enabled                        = true
+    ecs_alarms_cpu_utilization_high_threshold = 20
+    ecs_alarms_cpu_utilization_low_threshold  = 10
   }
   ```
 

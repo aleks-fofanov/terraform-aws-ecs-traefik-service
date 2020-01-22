@@ -5,6 +5,11 @@
 
 Terraform module to provision [Traefik](https://traefik.io/) service in ECS
 
+### Terraform versions
+Terraform 0.12. Pin module version to ~> v2.0. Submit pull-requests to `master` branch.
+
+Terraform 0.11. Pin module version to ~> v1.0. Submit pull-requests to `terraform011` branch.
+
 
 ---
 
@@ -22,7 +27,7 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 ## Introduction
 
 Traefik service in ECS is supposed to act as an edge router and route traffic to other containers in your ECS cluster
-based on their docker labels.
+based on their docker lables.
 
 For more information on which docker labels to set on your container, see
 [Traefik documentation](https://docs.traefik.io/configuration/backends/docker/#on-containers).
@@ -68,7 +73,7 @@ module "traefik" {
 
 ### Example With [Traefik Dashboard](https://docs.traefik.io/configuration/api/) Enabled
 
-This example launches a Traefik service in ECS using `FARGATE` with enabled dashboard and API endpoints.
+This example launches a Traefik setvice in ECS using `FARGATE` with enabled dashboard and API endpoints.
 Basic auth is enabled by default for both. You can use `openssl` to generate password for basic auth:
 ```bash
 openssl passwd -apr1
@@ -287,7 +292,7 @@ In general, PRs are welcome. We follow the typical "fork-and-pull" Git workflow.
 
 ## Copyright
 
-Copyright © 2017-2019 Aleksandr Fofanov
+Copyright © 2017-2020 Aleksandr Fofanov
 
 
 
