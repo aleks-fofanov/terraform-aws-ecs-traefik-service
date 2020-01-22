@@ -8,9 +8,9 @@ This module supports [traefik v1.7](https://docs.traefik.io/v1.7/).
 
 ### Terraform versions
 
-Terraform 0.12. Pin module version to ~> v1.0. Submit pull-requests to `master` branch.
+Terraform 0.12. Pin module version to ~> v2.0. Submit pull-requests to `master` branch.
 
-Terraform 0.11. Pin module version to ~> v0.1. Submit pull-requests to `terraform011` branch.
+Terraform 0.11. Pin module version to ~> v1.0. Submit pull-requests to `terraform011` branch.
 
 
 ---
@@ -32,7 +32,7 @@ Traefik service in ECS is supposed to act as an edge router and route traffic to
 based on their docker lables.
 
 For more information on which docker labels to set on your container, see
-[Traefik documentation](https://docs.traefik.io/configuration/backends/docker/#on-containers).
+[Traefik documentation](https://docs.traefik.io/v1.7/configuration/backends/docker/#on-containers).
 
 SSL termination is supposed to be done on AWS ALB. Traefik tasks are launched with `awsvpc` network mode and needs
 Internet access to connect to ECS API in order to discover containers in your ECS cluster.
