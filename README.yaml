@@ -40,14 +40,21 @@ related:
 
 # Short description of this project
 description: |-
-  Terraform module to provision [Traefik](https://traefik.io/) service in ECS
+  Terraform module to provision [Traefik](https://traefik.io/) service in ECS.
+  This module supports [traefik v1.7](https://docs.traefik.io/v1.7/).
+
+  ### Terraform versions
+
+  Terraform 0.12. Pin module version to `~> 2.0`. Submit pull-requests to `master` branch.
+
+  Terraform 0.11. Pin module version to `~> 1.0`. Submit pull-requests to `terraform011` branch.
 
 introduction: |-
   Traefik service in ECS is supposed to act as an edge router and route traffic to other containers in your ECS cluster
   based on their docker lables.
 
   For more information on which docker labels to set on your container, see
-  [Traefik documentation](https://docs.traefik.io/configuration/backends/docker/#on-containers).
+  [Traefik documentation](https://docs.traefik.io/v1.7/configuration/backends/docker/#on-containers).
 
   SSL termination is supposed to be done on AWS ALB. Traefik tasks are launched with `awsvpc` network mode and needs
   Internet access to connect to ECS API in order to discover containers in your ECS cluster.
@@ -74,12 +81,12 @@ usage: |-
     subnet_ids            = ["XXXXXXXXXXX", "XXXXXXXXXXX", ..]
 
     launch_type      = "FARGATE"
-    assign_public_ip = "true"
+    assign_public_ip = true
   }
   ```
 
 examples: |-
-  ### Example With [Traefik Dashboard](https://docs.traefik.io/configuration/api/) Enabled
+  ### Example With [Traefik Dashboard](https://docs.traefik.io/v1.7/configuration/api/) Enabled
 
   This example launches a Traefik setvice in ECS using `FARGATE` with enabled dashboard and API endpoints.
   Basic auth is enabled by default for both. You can use `openssl` to generate password for basic auth:
@@ -103,9 +110,9 @@ examples: |-
     subnet_ids            = ["XXXXXXXXXXX", "XXXXXXXXXXX", ..]
 
     launch_type      = "FARGATE"
-    assign_public_ip = "true"
+    assign_public_ip = true
 
-    dashboard_enabled             = "true"
+    dashboard_enabled             = true
     dashboard_host                = "traefik.example.com"
     dashboard_basic_auth_user     = "admin"
     dashboard_basic_auth_password = "$$$apr1$$$Rj21EpGU$$$KCwTHCbAIVhw0BiSdU4Me0"
@@ -136,23 +143,23 @@ examples: |-
     subnet_ids            = ["XXXXXXXXXXX", "XXXXXXXXXXX", ..]
 
     launch_type      = "FARGATE"
-    assign_public_ip = "true"
+    assign_public_ip = true
 
-    dashboard_enabled             = "true"
+    dashboard_enabled             = true
     dashboard_host                = "traefik.example.com"
     dashboard_basic_auth_user     = "admin"
     dashboard_basic_auth_password = "$$$apr1$$$Rj21EpGU$$$KCwTHCbAIVhw0BiSdU4Me0"
 
-    autoscaling_enabled               = "true"
+    autoscaling_enabled               = true
     autoscaling_dimension             = "cpu"
-    autoscaling_min_capacity          = "1"
-    autoscaling_max_capacity          = "3"
-    autoscaling_scale_up_cooldown     = "60"
-    autoscaling_scale_down_cooldown   = "60"
+    autoscaling_min_capacity          = 1
+    autoscaling_max_capacity          = 3
+    autoscaling_scale_up_cooldown     = 60
+    autoscaling_scale_down_cooldown   = 60
 
-    ecs_alarms_enabled                        = "true"
-    ecs_alarms_cpu_utilization_high_threshold = "20"
-    ecs_alarms_cpu_utilization_low_threshold  = "10"
+    ecs_alarms_enabled                        = true
+    ecs_alarms_cpu_utilization_high_threshold = 20
+    ecs_alarms_cpu_utilization_low_threshold  = 10
   }
   ```
 
