@@ -19,7 +19,7 @@ locals {
 
   traefik_docker_labels = merge(
     local.default_docker_labels,
-    local.basic_auth_docker_labels[var.dashboard_basic_auth_enabled == true ? "enabled" : "disabled"],
+    lookup(local.basic_auth_docker_labels, var.dashboard_basic_auth_enabled ? "enabled" : "disabled", {})
   )
 
   logs_region = var.logs_region == "" ? var.ecs_cluster_region : var.logs_region
@@ -45,7 +45,7 @@ module "default_label" {
 
 module "traefik_container_definition" {
   source                       = "git::https://github.com/cloudposse/terraform-aws-ecs-container-definition?ref=tags/0.23.0"
-  container_name               = "traefik"
+  container_name               = var.container_name
   container_image              = var.task_image
   container_memory             = var.task_memory
   container_memory_reservation = var.task_memory_reservation
@@ -70,22 +70,26 @@ module "traefik_container_definition" {
   port_mappings = [
     {
       containerPort = var.http_port
+      hostPort      = var.http_port
       protocol      = "tcp"
     },
     {
       containerPort = var.api_port
+      hostPort      = var.api_port
       protocol      = "tcp"
     },
   ]
 
   mount_points = var.mount_points
 
-  log_driver = "awslogs"
-
-  log_options = {
-    "awslogs-region"        = local.logs_region
-    "awslogs-group"         = aws_cloudwatch_log_group.default.name
-    "awslogs-stream-prefix" = var.container_name
+  log_configuration = {
+    logDriver = "awslogs"
+    options = {
+      "awslogs-region"        = local.logs_region
+      "awslogs-group"         = aws_cloudwatch_log_group.default.name
+      "awslogs-stream-prefix" = var.container_name
+    }
+    secretOptions = []
   }
 
   docker_labels = local.traefik_docker_labels
@@ -110,17 +114,25 @@ module "alb_service_task" {
   health_check_grace_period_seconds = var.health_check_grace_period_seconds
 
   container_definition_json = module.traefik_container_definition.json
-  container_name            = var.container_name
   desired_count             = var.desired_count
   assign_public_ip          = var.assign_public_ip
 
-  network_mode         = "awsvpc"
-  ecs_cluster_arn      = var.ecs_cluster_arn
-  alb_security_group   = var.alb_security_group_id
-  alb_target_group_arn = var.alb_target_group_arn
-  vpc_id               = var.vpc_id
-  subnet_ids           = var.subnet_ids
-  security_group_ids   = [var.security_group_ids, aws_security_group.default.id]
+  network_mode       = "awsvpc"
+  ecs_cluster_arn    = var.ecs_cluster_arn
+  alb_security_group = var.alb_security_group_id
+
+  ecs_load_balancers = [
+    {
+      container_name   = var.container_name
+      container_port   = var.http_port
+      elb_name         = ""
+      target_group_arn = var.alb_target_group_arn
+    }
+  ]
+
+  vpc_id             = var.vpc_id
+  subnet_ids         = var.subnet_ids
+  security_group_ids = compact(concat(var.security_group_ids, [aws_security_group.default.id]))
 
   volumes = var.volumes
 
@@ -135,7 +147,7 @@ module "alb_service_task" {
 # IAM Roles
 #############################################################
 
-# Per https://docs.traefik.io/configuration/backends/ecs/#policy
+# Per https://docs.traefik.io/v1.7/configuration/backends/ecs/#policy
 
 data "aws_iam_policy_document" "traefik" {
   statement {

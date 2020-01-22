@@ -46,7 +46,7 @@ variable "alb_security_group_id" {
 
 variable "alb_target_group_arn" {
   type        = string
-  description = "ALB security group id. Traefik container will accept traefik from port 80"
+  description = "ALB Target Group ARN"
 }
 
 variable "subnet_ids" {
@@ -215,20 +215,28 @@ variable "health_check_grace_period_seconds" {
 }
 
 variable "mount_points" {
-  type        = list(string)
+  type = list(object({
+    containerPath = string
+    sourceVolume  = string
+  }))
+
   description = "Container mount points. This is a list of maps, where each map should contain a `containerPath` and `sourceVolume`"
-  default     = []
-  #default     = [
-  #  {
-  #    containerPath  = "/tmp"
-  #    sourceVolume = "test-volume"
-  #  }
-  #]
+  default     = null
 }
 
 variable "volumes" {
-  type        = list(string)
-  description = "Task volume definitions as list of maps"
+  type = list(object({
+    host_path = string
+    name      = string
+    docker_volume_configuration = list(object({
+      autoprovision = bool
+      driver        = string
+      driver_opts   = map(string)
+      labels        = map(string)
+      scope         = string
+    }))
+  }))
+  description = "Task volume definitions as list of configuration objects"
   default     = []
 }
 
