@@ -8,9 +8,9 @@ This module supports [traefik v1.7](https://docs.traefik.io/v1.7/).
 
 ### Terraform versions
 
-Terraform 0.12. Pin module version to ~> v2.0. Submit pull-requests to `master` branch.
+Terraform 0.12. Pin module version to `~> 2.0`. Submit pull-requests to `master` branch.
 
-Terraform 0.11. Pin module version to ~> v1.0. Submit pull-requests to `terraform011` branch.
+Terraform 0.11. Pin module version to `~> 1.0`. Submit pull-requests to `terraform011` branch.
 
 
 ---
